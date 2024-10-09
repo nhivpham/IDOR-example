@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="container">
+  <h2>Select Profile</h2>
+  <select [value]="selectedUser" (change)="changeSelectedUser($event)">
+    @for(user of users; track user) {
+      <option [value]="user.id">{{user.id}} ({{user.name}})</option>
+    }
+  </select>
+  <p class="small-text">This dropdown simulates changing the URL to access other users' profiles, demonstrating an
+    IDOR vulnerability.</p>
+</div>

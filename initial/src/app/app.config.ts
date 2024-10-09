@@ -1,12 +1,12 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
+
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { mockBackendInterceptor } from './mock-backend.interceptor';
+import { authInterceptor } from './backend/auth.interceptor';
+import { mockBackendInterceptor } from './backend/mock-backend.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideRouter(routes),
-    provideHttpClient(withInterceptors([mockBackendInterceptor]))
-  ]
+  providers: [provideRouter(routes, withComponentInputBinding()), provideHttpClient(withInterceptors([authInterceptor,
+  mockBackendInterceptor]))]
 };
